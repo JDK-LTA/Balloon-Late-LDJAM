@@ -24,6 +24,8 @@ public class ObstacleSpawner : MonoBehaviour
     float t = 0;
     public float cooldownBetweenLevels = 14f;
     float l = 0;
+    public float obstacleSpeed = 2f;
+
 
     private void Start()
     {
@@ -63,12 +65,7 @@ public class ObstacleSpawner : MonoBehaviour
         lastObstacleIndex = index;
 
         GameObject go = Instantiate(obstacles[index], spawnPoint.position, spawnPoint.rotation);
-        //if (Random.Range(0, 2) == 1)
-        //{
-        //    Vector3 ls = go.transform.localScale;
-        //    ls.x *= -1;
-        //    go.transform.localScale = ls;
-        //}
+        go.GetComponent<SpikeBehaviour>().downSpeed = obstacleSpeed;
     }
     private void UpTheDifficulty()
     {

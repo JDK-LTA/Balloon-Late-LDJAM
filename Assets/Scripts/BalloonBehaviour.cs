@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PU
+{
+    INFLATE, DEFLATE, ROCKET, SHIELD, AK47, RAY_GUN, NO_PU
+}
+
 public class BalloonBehaviour : MonoBehaviour
 {
-    public Transform yPosition;
+    public Transform yDownLimit;
     public float windSpeed = 2f;
-    public float size;
+    public float size = 0.6f;
+    public float maxSize = 0.9f, minSize = 0.3f;
+    Vector2 originalScale;
 
     public float maxTime;
     public float minSwipeDistance;
@@ -25,47 +32,181 @@ public class BalloonBehaviour : MonoBehaviour
 
     Rigidbody2D rb;
 
+    bool puActive = false;
+    bool isShielded = false;
+    bool isStarred = false;
+    bool hasPU = false;
+    PU localPu = PU.NO_PU;
+    public int akAmmo = 5;
+    int orAmmo;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        transform.localScale = new Vector3(size, size);
+        originalScale = transform.localScale;
+
+        orAmmo = akAmmo;
     }
 
+    float puTimer = 0;
+    float t = 0;
     void Update()
     {
-#if UNITY_STANDALONE || UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
+        #region INPUT
+        if (isStarred)
         {
-            if (Input.mousePosition.x > Screen.width / 2)
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+            if (Input.GetMouseButtonDown(0))
             {
-                InputRight?.Invoke();
-                RightToLeftWind();
+                if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > yDownLimit.position.y)
+                {
+                    if (Input.mousePosition.x > Screen.width / 2)
+                    {
+                        InputRight?.Invoke();
+                        RightToLeftWind();
+                    }
+                    else
+                    {
+                        InputLeft?.Invoke();
+                        LeftToRightWind();
+                    }
+                }
             }
-            else
+            if (Input.GetMouseButtonDown(1))
             {
-                InputLeft?.Invoke();
-                LeftToRightWind();
+                puActive = true;
+                UsePU(true);
             }
-            //Debug.Log(rb.velocity.x);
-        }
 #endif
 #if UNITY_IOS || UNITY_EDITOR
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.position.x > Screen.width / 2)
+            if (Input.touchCount > 0)
             {
-                InputRight?.Invoke();
-                RightToLeftWind();
+                Touch touch = Input.GetTouch(0);
+                if (Camera.main.ScreenToWorldPoint(touch.position).y > yDownLimit.position.y)
+                {
+                    if (touch.position.x > Screen.width / 2)
+                    {
+                        InputRight?.Invoke();
+                        RightToLeftWind();
+                    }
+                    else
+                    {
+                        InputLeft?.Invoke();
+                        LeftToRightWind();
+                    }
+                }
             }
-            else
+#endif
+        }
+        #endregion
+
+        if (puActive)
+        {
+            t += Time.deltaTime;
+            if (t >= puTimer)
             {
-                InputLeft?.Invoke();
-                LeftToRightWind();
+                ClearPU();
             }
         }
-#endif
     }
 
+    private void ChangeSize(bool up)
+    {
+        if (up)
+        {
+            size += 0.15f;
+        }
+        else
+        {
+            size -= 0.15f;
+        }
+        transform.localScale = new Vector3(size, size);
+    }
+    private void UsePU(bool up)
+    {
+        switch (localPu)
+        {
+            case PU.ROCKET:
+                RocketPU(up);
+                break;
+            case PU.SHIELD:
+                ShieldPU(up);
+                break;
+            case PU.AK47:
+                Ak47PU(up);
+                break;
+            case PU.RAY_GUN:
+                RayGunPU();
+                break;
+            case PU.NO_PU:
+                break;
+        }
+    }
+    private void ClearPU()
+    {
+        puActive = false;
+        UsePU(false);
+        localPu = PU.NO_PU;
+        t = 0;
+    }
+
+    #region POWER UPS
+    private void RocketPU(bool up)
+    {
+        isStarred = up;
+        if (up)
+        {
+            GameManager.Instance.RocketActive();
+        }
+        else
+        {
+            GameManager.Instance.RocketDeactive();
+        }
+    }
+    private void ShieldPU(bool up)
+    {
+        isShielded = up;
+        if (up)
+        {
+            //ACTIVATE SHIELD VISUAL EFFECT
+        }
+        else
+        {
+            //DEACTIVATE SHIELD VISUAL EFFECT
+        }
+    }
+    private void Ak47PU(bool up)
+    {
+        if (up)
+        {
+            //SHOOT PROJECTILE
+            akAmmo--;
+            if (akAmmo == 0)
+            {
+                ClearPU();
+            }
+        }
+        else
+        {
+            //DEACTIVATE AK VISUAL EFFECT
+            akAmmo = orAmmo;
+        }
+    }
+    private void RayGunPU()
+    {
+        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            obstacles[i].transform.localScale /= 2;
+        }
+
+        ClearPU();
+    }
+#endregion
+    #region WINDS
     private void RightToLeftWind()
     {
         rb.AddForce(new Vector2(-windSpeed, 0), ForceMode2D.Force);
@@ -74,12 +215,54 @@ public class BalloonBehaviour : MonoBehaviour
     {
         rb.AddForce(new Vector2(windSpeed, 0), ForceMode2D.Force);
     }
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        PowerUp pu;
         if (collision.tag == "Obstacle")
         {
-            Debug.Log("Dead");
+            if (!isShielded && !isStarred)
+            {
+                Debug.Log("Dead");
+            }
+            else if (isStarred)
+            {
+                Debug.Log("Has star");
+            }
+            else if (isShielded)
+            {
+                Debug.Log("Had shield");
+                ClearPU();
+            }
+        }
+        else if (pu = collision.GetComponent<PowerUp>())
+        {
+            if (pu.size < size)
+            {
+                switch (pu.powerUp)
+                {
+                    case PU.INFLATE:
+                        ChangeSize(true);
+                        break;
+                    case PU.DEFLATE:
+                        ChangeSize(false);
+                        break;
+                    case PU.ROCKET:
+                    case PU.SHIELD:
+                    case PU.AK47:
+                    case PU.RAY_GUN:
+                        if (!hasPU)
+                        {
+                            hasPU = true;
+                            localPu = pu.powerUp;
+                            puTimer = pu.timer;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
