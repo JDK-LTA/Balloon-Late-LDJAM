@@ -55,7 +55,7 @@ public class BalloonBehaviour : MonoBehaviour
     void Update()
     {
         #region INPUT
-        if (isStarred)
+        if (!isStarred)
         {
 
 #if UNITY_STANDALONE || UNITY_EDITOR
@@ -209,10 +209,12 @@ public class BalloonBehaviour : MonoBehaviour
     #region WINDS
     private void RightToLeftWind()
     {
+        Debug.Log("d");
         rb.AddForce(new Vector2(-windSpeed, 0), ForceMode2D.Force);
     }
     private void LeftToRightWind()
     {
+        Debug.Log("d");
         rb.AddForce(new Vector2(windSpeed, 0), ForceMode2D.Force);
     }
     #endregion
