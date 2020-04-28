@@ -36,7 +36,7 @@ public class BalloonBehaviour : MonoBehaviour
     bool isShielded = false;
     bool isStarred = false;
     bool hasPU = false;
-    PU localPu = PU.NO_PU;
+    public PU localPu = PU.NO_PU;
     public int akAmmo = 5;
     int orAmmo;
 
@@ -50,7 +50,7 @@ public class BalloonBehaviour : MonoBehaviour
         orAmmo = akAmmo;
     }
 
-    float puTimer = 0;
+    float puTimer = 5f;
     float t = 0;
     void Update()
     {
@@ -139,7 +139,10 @@ public class BalloonBehaviour : MonoBehaviour
                 Ak47PU(up);
                 break;
             case PU.RAY_GUN:
-                RayGunPU();
+                if (up)
+                {
+                    RayGunPU();
+                }
                 break;
             case PU.NO_PU:
                 break;
@@ -160,6 +163,7 @@ public class BalloonBehaviour : MonoBehaviour
         if (up)
         {
             GameManager.Instance.RocketActive();
+            rb.velocity = Vector2.zero;
         }
         else
         {
@@ -205,16 +209,14 @@ public class BalloonBehaviour : MonoBehaviour
 
         ClearPU();
     }
-#endregion
+    #endregion
     #region WINDS
     private void RightToLeftWind()
     {
-        Debug.Log("d");
         rb.AddForce(new Vector2(-windSpeed, 0), ForceMode2D.Force);
     }
     private void LeftToRightWind()
     {
-        Debug.Log("d");
         rb.AddForce(new Vector2(windSpeed, 0), ForceMode2D.Force);
     }
     #endregion
@@ -224,18 +226,20 @@ public class BalloonBehaviour : MonoBehaviour
         PowerUp pu;
         if (collision.tag == "Obstacle")
         {
-            if (!isShielded && !isStarred)
-            {
-                Debug.Log("Dead");
-            }
-            else if (isStarred)
+            if (isStarred)
             {
                 Debug.Log("Has star");
+                Destroy(collision.gameObject);
             }
             else if (isShielded)
             {
                 Debug.Log("Had shield");
+                Destroy(collision.gameObject);
                 ClearPU();
+            }
+            else
+            {
+                Debug.Log("Dead");
             }
         }
         else if (pu = collision.GetComponent<PowerUp>())
