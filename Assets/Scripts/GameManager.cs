@@ -11,14 +11,11 @@ public class GameManager : MonoBehaviour
     }
 
     public float score;
-    public bool isX2 = false;
     public float scoreXSec;
+    public bool isRocket = false;
+    public float multWithRocket = 2f;
     public ObstacleSpawner spawner;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public BackgroundInfinite bg1, bg2;
 
     // Update is called once per frame
     void Update()
@@ -28,14 +25,30 @@ public class GameManager : MonoBehaviour
 
     public void RocketActive()
     {
-        spawner.obstacleSpeed *= 2;
-        isX2 = true;
-        scoreXSec *= 2;
+        SpikeBehaviour[] createdObs = FindObjectsOfType<SpikeBehaviour>();
+        for (int i = 0; i < createdObs.Length; i++)
+        {
+            createdObs[i].downSpeed *= multWithRocket;
+        }
+        spawner.obstacleSpeed *= multWithRocket;
+        spawner.cooldownToSpawn /= multWithRocket;
+        isRocket = true;
+        scoreXSec *= multWithRocket;
+        bg1.speed *= multWithRocket;
+        bg2.speed *= multWithRocket;
     }
     public void RocketDeactive()
     {
-        spawner.obstacleSpeed /= 2;
-        isX2 = false;
-        scoreXSec /= 2;
+        SpikeBehaviour[] createdObs = FindObjectsOfType<SpikeBehaviour>();
+        for (int i = 0; i < createdObs.Length; i++)
+        {
+            createdObs[i].downSpeed /= multWithRocket;
+        }
+        spawner.obstacleSpeed /= multWithRocket;
+        spawner.cooldownToSpawn *= multWithRocket;
+        isRocket = false;
+        scoreXSec /= multWithRocket;
+        bg1.speed /= multWithRocket;
+        bg2.speed /= multWithRocket;
     }
 }
