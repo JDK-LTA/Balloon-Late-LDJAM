@@ -38,6 +38,8 @@ public class BalloonBehaviour : MonoBehaviour
     bool hasPU = false;
     public PU localPu = PU.NO_PU;
     public int akAmmo = 5;
+    public GameObject bulletPrefab;
+    public Transform shootingPos;
     int orAmmo;
 
     private void Start()
@@ -184,9 +186,11 @@ public class BalloonBehaviour : MonoBehaviour
     }
     private void Ak47PU(bool up)
     {
+        puTimer = 999999;
         if (up)
         {
             //SHOOT PROJECTILE
+            ShootProjectile();
             akAmmo--;
             if (akAmmo == 0)
             {
@@ -198,6 +202,10 @@ public class BalloonBehaviour : MonoBehaviour
             //DEACTIVATE AK VISUAL EFFECT
             akAmmo = orAmmo;
         }
+    }
+    private void ShootProjectile()
+    {
+        GameObject go = Instantiate(bulletPrefab, shootingPos.position, shootingPos.rotation);
     }
     private void RayGunPU()
     {
