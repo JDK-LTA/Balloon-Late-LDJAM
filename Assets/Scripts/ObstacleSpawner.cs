@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
+using Random = UnityEngine.Random;
 
 public class ObstacleSpawner : MonoBehaviour
 {
@@ -66,7 +68,21 @@ public class ObstacleSpawner : MonoBehaviour
 
         GameObject go = Instantiate(obstacles[index], spawnPoint.position, spawnPoint.rotation);
         go.GetComponent<SpikeBehaviour>().downSpeed = obstacleSpeed;
+
+        CheckAndTurnIntoGrenade(go);
     }
+
+    private void CheckAndTurnIntoGrenade(GameObject go)
+    {
+        if (Random.Range(0, 100) < 49)
+        {
+            SpriteRenderer[] srs = go.GetComponentsInChildren<SpriteRenderer>();
+            int k = Random.Range(0, srs.Length);
+            srs[k].color = Color.red; //CAMBIAR SPRITE AQUI. EL CAMBIO DE COLOR ES SOLO PARA DEBUG
+            srs[k].gameObject.AddComponent<Explosive>();
+        }
+    }
+
     private void UpTheDifficulty()
     {
         difficulty++;
