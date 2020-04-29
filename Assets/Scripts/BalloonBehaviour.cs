@@ -33,14 +33,19 @@ public class BalloonBehaviour : MonoBehaviour
     Rigidbody2D rb;
 
     bool puActive = false;
-    bool isShielded = false;
-    bool isStarred = false;
     bool hasPU = false;
     public PU localPu = PU.NO_PU;
+
+    bool isShielded = false;
+    public GameObject shield;
+
+    bool isStarred = false;
+
     public int akAmmo = 5;
     public GameObject bulletPrefab;
     public Transform shootingPos;
     int orAmmo;
+
 
     private void Start()
     {
@@ -79,25 +84,27 @@ public class BalloonBehaviour : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(1))
             {
-                puActive = true;
-                UsePU(true);
+                PowerUpButtonUsing();
             }
 #endif
-#if UNITY_IOS || UNITY_EDITOR
+#if UNITY_IOS || UNITY_EDITOR || UNITY_ANDROID
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
                 if (Camera.main.ScreenToWorldPoint(touch.position).y > yDownLimit.position.y)
                 {
-                    if (touch.position.x > Screen.width / 2)
+                    if (touch.phase == TouchPhase.Began)
                     {
-                        InputRight?.Invoke();
-                        RightToLeftWind();
-                    }
-                    else
-                    {
-                        InputLeft?.Invoke();
-                        LeftToRightWind();
+                        if (touch.position.x > Screen.width / 2)
+                        {
+                            InputRight?.Invoke();
+                            RightToLeftWind();
+                        }
+                        else
+                        {
+                            InputLeft?.Invoke();
+                            LeftToRightWind();
+                        }
                     }
                 }
             }
@@ -113,6 +120,12 @@ public class BalloonBehaviour : MonoBehaviour
                 ClearPU();
             }
         }
+    }
+
+    public void PowerUpButtonUsing()
+    {
+        puActive = true;
+        UsePU(true);
     }
 
     private void ChangeSize(bool up)
@@ -133,9 +146,6 @@ public class BalloonBehaviour : MonoBehaviour
         {
             case PU.ROCKET:
                 RocketPU(up);
-                break;
-            case PU.SHIELD:
-                ShieldPU(up);
                 break;
             case PU.AK47:
                 Ak47PU(up);
@@ -174,21 +184,25 @@ public class BalloonBehaviour : MonoBehaviour
     }
     private void ShieldPU(bool up)
     {
+
         isShielded = up;
-        if (up)
-        {
-            //ACTIVATE SHIELD VISUAL EFFECT
-        }
-        else
-        {
-            //DEACTIVATE SHIELD VISUAL EFFECT
-        }
+        shield.SetActive(up);
+        //if (up)
+        //{
+        //    //ACTIVATE SHIELD VISUAL EFFECT
+        //    shield.SetActive(true);
+        //}
+        //else
+        //{
+        //    //DEACTIVATE SHIELD VISUAL EFFECT
+
+        //}
     }
     private void Ak47PU(bool up)
     {
-        puTimer = 999999;
         if (up)
         {
+            puTimer = 999999;
             //SHOOT PROJECTILE
             ShootProjectile();
             akAmmo--;
@@ -243,7 +257,7 @@ public class BalloonBehaviour : MonoBehaviour
             {
                 Debug.Log("Had shield");
                 Destroy(collision.gameObject);
-                ClearPU();
+                ShieldPU(false);
             }
             else
             {
@@ -262,8 +276,10 @@ public class BalloonBehaviour : MonoBehaviour
                     case PU.DEFLATE:
                         ChangeSize(false);
                         break;
-                    case PU.ROCKET:
                     case PU.SHIELD:
+                        ShieldPU(true);
+                        break;
+                    case PU.ROCKET:
                     case PU.AK47:
                     case PU.RAY_GUN:
                         if (!hasPU)
