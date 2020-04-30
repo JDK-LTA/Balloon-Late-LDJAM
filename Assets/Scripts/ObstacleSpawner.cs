@@ -20,14 +20,22 @@ public class ObstacleSpawner : MonoBehaviour
     public List<GameObject> diff3Obstacles;
     public List<GameObject> diff4Obstacles;
     [SerializeField] List<GameObject> obstacles = new List<GameObject>();
+
+    public GameObject[] powerups;
+
     int lastObstacleIndex = -1;
 
     public float cooldownToSpawn = 2f;
+    public float cdMultToSpawnPU = 3;
     float t = 0;
     public float cooldownBetweenLevels = 14f;
     float l = 0;
     public float obstacleSpeed = 2f;
 
+    [Range(1, 100)]
+    public int explosivePercentage = 15;
+
+    List<Vector2> spawnPoss = new List<Vector2>();
 
     private void Start()
     {
@@ -40,7 +48,16 @@ public class ObstacleSpawner : MonoBehaviour
         {
             obstacles.AddRange(allLevelObstacles[i]);
         }
+
+        float aux = -2.25f;
+        for (int i = 0; i < 5; i++)
+        {
+            spawnPoss.Add(new Vector2(aux, spawnPoint.position.y));
+            aux += 1.125f;
+        }
     }
+
+    int puCounter = 0;
     private void Update()
     {
         t += Time.deltaTime;
@@ -49,6 +66,13 @@ public class ObstacleSpawner : MonoBehaviour
         {
             t = 0;
             SpawnObstacle();
+
+            puCounter++;
+            if (puCounter >= cdMultToSpawnPU)
+            {
+                puCounter = 0;
+                SpawnPU();
+            }
         }
         if (l >= cooldownBetweenLevels && difficulty < maxDifficulty)
         {
@@ -67,14 +91,60 @@ public class ObstacleSpawner : MonoBehaviour
         lastObstacleIndex = index;
 
         GameObject go = Instantiate(obstacles[index], spawnPoint.position, spawnPoint.rotation);
-        go.GetComponent<SpikeBehaviour>().downSpeed = obstacleSpeed;
+        SpikeBehaviour sb = go.GetComponent<SpikeBehaviour>();
+        sb.downSpeed = obstacleSpeed;
+        GameManager.Instance.obsStacks.Add(sb.stack);
+
 
         CheckAndTurnIntoGrenade(go);
     }
 
+    int k = -1, lastK = -1;
+    private void SpawnPU()
+    {
+        do
+        {
+            k = Random.Range(0, powerups.Length);
+        } while (k == lastK);
+        lastK = k;
+
+        int posIndex = GetAvailablePosition();
+        Vector3 spPos;
+        if (posIndex != -1)
+        {
+            spPos = spawnPoss[posIndex];
+            GameObject go = Instantiate(powerups[k], spPos, transform.rotation);
+            Powerup pu = go.GetComponent<Powerup>();
+            pu.SetSize(pu.sizes[Random.Range(0, pu.sizes.Count)]);
+        }
+    }
+
+    private int GetAvailablePosition()
+    {
+        List<int> l = new List<int>();
+        ObsStack os = GameManager.Instance.obsStacks[GameManager.Instance.obsStacks.Count - 1];
+        for (int i = 0; i < os.obs.Length; i++)
+        {
+            if (!os.obs[i])
+            {
+                l.Add(i);
+                Debug.Log(i);
+            }
+        }
+
+        if (l.Count > 1)
+        {
+            return l[Random.Range(0, l.Count)];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     private void CheckAndTurnIntoGrenade(GameObject go)
     {
-        if (Random.Range(0, 100) < 49)
+        if (Random.Range(0, 100) < explosivePercentage - 1)
         {
             SpriteRenderer[] srs = go.GetComponentsInChildren<SpriteRenderer>();
             int k = Random.Range(0, srs.Length);

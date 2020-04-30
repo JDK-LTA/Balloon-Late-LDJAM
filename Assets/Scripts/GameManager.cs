@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[System.Serializable]
+public class ObsStack
+{
+    public bool[] obs = new bool[5];
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -21,19 +26,20 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI crntScore = null;
     public GameObject pauseMenu = null;
 
+    public List<ObsStack> obsStacks = new List<ObsStack>();
+
+    public BalloonBehaviour balloon;
 
     public void Start()
     {
-
         if (pauseMenu)
         {
             pauseMenu.SetActive(false);
         }
         else
         {
-            Debug.LogError("Missing 'pauseMenu' variable in GameManager");
+            //Debug.LogError("Missing 'pauseMenu' variable in GameManager");
         }
-
     }
 
     // Update is called once per frame
@@ -47,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Missing 'crntScore' variable in GameManager");
+            //Debug.LogError("Missing 'crntScore' variable in GameManager");
         }
     }
 

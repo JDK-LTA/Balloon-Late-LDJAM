@@ -5,9 +5,8 @@ using UnityEngine;
 public class SpikeBehaviour : MonoBehaviour
 {
     public float downSpeed = 2;
-    //public int difficulty;
+    public ObsStack stack;
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.down * downSpeed * Time.deltaTime);

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1549881334165835002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1549881334165835000}
+  - component: {fileID: 1549881334165835001}
+  m_Layer: 0
+  m_Name: ObstacleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1549881334165835000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549881334165835002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549881334165835001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549881334165835002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3a50533762c104f815e8efcca0baef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 0}
+  difficulty: 1
+  diff1Obstacles:
+  - {fileID: 8480804953691243278, guid: bb556ff348968be4fb767d9796d5bfc0, type: 3}
+  - {fileID: 2289204227574361177, guid: ba07c1e7c2961a146abc7a1f83869d6f, type: 3}
+  - {fileID: 4303377950623374221, guid: dcf825ff0d9f48e43bdf250ffee1ff36, type: 3}
+  - {fileID: 1658087144878309310, guid: b50ebe47074f57646aad4507ad55f869, type: 3}
+  - {fileID: 8928841611532455956, guid: a8a3b1aa9fb49a745bdc4e5b23389be1, type: 3}
+  diff2Obstacles:
+  - {fileID: 4811689337591569538, guid: aaea1745ffb9477448df5d96da738f62, type: 3}
+  - {fileID: 5379386635686372887, guid: d2bc7e56d7ef96448912700ac501fc51, type: 3}
+  - {fileID: 4130540745063681985, guid: c300d30c95c3b8c4e859558c4b393281, type: 3}
+  - {fileID: 484237354589237761, guid: c2f3f85140548b14cb369c11b2f61d99, type: 3}
+  - {fileID: 7239246682982583898, guid: 2d34855577226f848b68b93fb5c2dc42, type: 3}
+  - {fileID: 3509459013058905672, guid: c40c78e4b44f97244a2be8a524788701, type: 3}
+  - {fileID: 3494136007936515997, guid: 8acee4add4fec204787e930e0b0ac6de, type: 3}
+  - {fileID: 8559077800675870100, guid: b1dbdee367f5d4a41994029b94668e1b, type: 3}
+  - {fileID: 55088592773023923, guid: eadf335a1f27b924992f93793f51c89b, type: 3}
+  - {fileID: 9209053442784869153, guid: 80a6831f7b273f74592ce3c3631fd5d9, type: 3}
+  diff3Obstacles:
+  - {fileID: 946677813222941017, guid: 4ea465c3ef0824e4c8041ba22a144b20, type: 3}
+  - {fileID: 3847825794174797350, guid: cc657aff6cc77e8408e78e71530875f7, type: 3}
+  - {fileID: 4970517216956055706, guid: c1e77221868b9ae47864b514051a14d3, type: 3}
+  - {fileID: 942597189999494087, guid: d118a513b9a6f1e4b9d716ba2f11d05c, type: 3}
+  - {fileID: 4209957940853945796, guid: 4e2c29d17dfbd9b4f937a8da8ab1c2dd, type: 3}
+  - {fileID: 2546754677105648216, guid: c5e91ffb1ed020043924b2d5c997ef1e, type: 3}
+  - {fileID: 8126568713470140897, guid: b1213b5dfe806f64ab215c535dba52a2, type: 3}
+  - {fileID: 4687009799353640298, guid: 1975b9b9ab6ebd04396327fda202d26e, type: 3}
+  - {fileID: 5541955292359018904, guid: 507f68b223669bf4db884b4b21051cad, type: 3}
+  - {fileID: 2253570443733103632, guid: f155f42031cec794ab501b8f8f6afb42, type: 3}
+  diff4Obstacles:
+  - {fileID: 6609382883818294075, guid: 3bcdd79682e646749b2ada6d0082782a, type: 3}
+  - {fileID: 4972454498374550229, guid: 9810eef4dbb6510438966073d47af92b, type: 3}
+  - {fileID: 192070608724411326, guid: 076fcab26e6f1b74384df702f3d520b6, type: 3}
+  - {fileID: 600320342295137941, guid: 49fc2cc30f4ad35489117a6f5bb6d7ff, type: 3}
+  - {fileID: 8943329267065073580, guid: c56cf06b997095e4f864eece994998bd, type: 3}
+  obstacles: []
+  powerups:
+  - {fileID: 6757331917049863926, guid: 82cbd1278a229ef45a71ed5ebb023f5c, type: 3}
+  - {fileID: 4651752945189818000, guid: a00cb8b58f1b3d943ad2d4fe10926f29, type: 3}
+  - {fileID: 8569930942838255738, guid: 246407898ff956746b6fc7dd7d99ae78, type: 3}
+  - {fileID: 6016145283761711108, guid: ada609fe33c21b04083cfb488906e52d, type: 3}
+  - {fileID: 6285676195753479562, guid: 1498eac604da6404a83ae58fca8d1797, type: 3}
+  - {fileID: 7685174410461434286, guid: 87f2fff123c2e6a4da280e6d884d2fad, type: 3}
+  cooldownToSpawn: 3
+  cdMultToSpawnPU: 3
+  cooldownBetweenLevels: 14
+  obstacleSpeed: 2
+  explosivePercentage: 15

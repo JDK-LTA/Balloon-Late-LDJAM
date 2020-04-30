@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downSpeed: 2
+  stack:
+    obs: 0000010000
 --- !u!61 &4677399008713719513
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,7 +193,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.017578125, y: 0.08203125, z: 0.00390625, w: 0.05078125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}

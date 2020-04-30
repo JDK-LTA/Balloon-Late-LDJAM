@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!58 &2789620154517817670
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6016145283761711108}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1001 &4168817209599850922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,9 +96,3 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6261066014550492408, guid: 87f2fff123c2e6a4da280e6d884d2fad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 87f2fff123c2e6a4da280e6d884d2fad, type: 3}
---- !u!1 &6016145283761711108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7685174410461434286, guid: 87f2fff123c2e6a4da280e6d884d2fad,
-    type: 3}
-  m_PrefabInstance: {fileID: 4168817209599850922}
-  m_PrefabAsset: {fileID: 0}

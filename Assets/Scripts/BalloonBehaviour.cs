@@ -46,7 +46,6 @@ public class BalloonBehaviour : MonoBehaviour
     public Transform shootingPos;
     int orAmmo;
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -132,11 +131,17 @@ public class BalloonBehaviour : MonoBehaviour
     {
         if (up)
         {
-            size += 0.15f;
+            if (size < 0.9f)
+            {
+                size += 0.15f;
+            }
         }
         else
         {
-            size -= 0.15f;
+            if (size > 0.3f)
+            {
+                size -= 0.15f;
+            }
         }
         transform.localScale = new Vector3(size, size);
     }
@@ -248,26 +253,14 @@ public class BalloonBehaviour : MonoBehaviour
         Powerup pu;
         if (collision.tag == "Obstacle")
         {
-            if (isStarred)
-            {
-                Debug.Log("Has star");
-                Destroy(collision.gameObject);
-            }
-            else if (isShielded)
-            {
-                Debug.Log("Had shield");
-                Destroy(collision.gameObject);
-                ShieldPU(false);
-            }
-            else
-            {
-                Debug.Log("Dead");
-            }
+            Death(collision);
         }
         else if (pu = collision.GetComponent<Powerup>())
         {
             if (pu.size <= size)
             {
+
+
                 switch (pu.powerUp)
                 {
                     case PU.INFLATE:
@@ -293,7 +286,32 @@ public class BalloonBehaviour : MonoBehaviour
                     default:
                         break;
                 }
+
+                Destroy(collision.gameObject);
             }
+            else
+            {
+                Death(collision);
+            }
+        }
+    }
+
+    private void Death(Collider2D collision)
+    {
+        if (isStarred)
+        {
+            Debug.Log("Has star");
+            Destroy(collision.gameObject);
+        }
+        else if (isShielded)
+        {
+            Debug.Log("Had shield");
+            Destroy(collision.gameObject);
+            ShieldPU(false);
+        }
+        else
+        {
+            Debug.Log("Dead");
         }
     }
 }

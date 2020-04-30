@@ -97,7 +97,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.017578125, y: 0.08203125, z: 0.00390625, w: 0.05078125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -194,6 +194,21 @@ PrefabInstance:
     - target: {fileID: 7532459047073839391, guid: dcf825ff0d9f48e43bdf250ffee1ff36,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908543260956866283, guid: dcf825ff0d9f48e43bdf250ffee1ff36,
+        type: 3}
+      propertyPath: stack.obs.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908543260956866283, guid: dcf825ff0d9f48e43bdf250ffee1ff36,
+        type: 3}
+      propertyPath: stack.obs.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908543260956866283, guid: dcf825ff0d9f48e43bdf250ffee1ff36,
+        type: 3}
+      propertyPath: stack.obs.Array.data[2]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7274549820380403999, guid: dcf825ff0d9f48e43bdf250ffee1ff36,
