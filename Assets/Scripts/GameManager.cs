@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,11 +18,61 @@ public class GameManager : MonoBehaviour
     public ObstacleSpawner spawner;
     public BackgroundInfinite bg1, bg2;
 
+    public TextMeshProUGUI crntScore = null;
+    public GameObject pauseMenu = null;
+
+
+    public void Start()
+    {
+
+        if (pauseMenu)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Missing 'pauseMenu' variable in GameManager");
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
         score += scoreXSec * Time.deltaTime;
+
+        if (crntScore)
+        {
+            crntScore.text = score.ToString();
+        }
+        else
+        {
+            Debug.LogError("Missing 'crntScore' variable in GameManager");
+        }
     }
+
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+
+    }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+
+        //GO TO MENU
+    }
+
 
     public void RocketActive()
     {
