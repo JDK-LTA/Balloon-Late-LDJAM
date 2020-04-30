@@ -26,18 +26,6 @@ TextureImporter:
   - first:
       213: -2588776706855516186
     second: Globitoanimated_7
-  - first:
-      213: -1747832514717621163
-    second: Globitoanimated_8
-  - first:
-      213: -5848773502615615419
-    second: Globitoanimated_9
-  - first:
-      213: -2899358341253443278
-    second: Globitoanimated_10
-  - first:
-      213: -7515849989993786942
-    second: Globitoanimated_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -81,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,19 +113,40 @@ TextureImporter:
       name: Globitoanimated_0
       rect:
         serializedVersion: 2
-        x: 98
-        y: 812
-        width: 70
-        height: 232
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 768
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9135b5caaa086a54daae590c35c13af9
+      spriteID: 84b87181881c36f45a9a82979435f381
       internalID: -3743895830565858992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Globitoanimated_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7af052118a780748ab6778501f3fdaa
+      internalID: -6477613975684782997
       vertices: []
       indices: 
       edges: []
@@ -146,18 +155,18 @@ TextureImporter:
       name: Globitoanimated_2
       rect:
         serializedVersion: 2
-        x: 364
-        y: 810
-        width: 86
-        height: 235
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5615523c41fa3d941a0d0c5bd6e7240e
+      spriteID: 2217ba78fd47b9144a42270cec664e84
       internalID: -1042592526224438985
       vertices: []
       indices: 
@@ -167,18 +176,18 @@ TextureImporter:
       name: Globitoanimated_3
       rect:
         serializedVersion: 2
-        x: 601
-        y: 825
-        width: 124
-        height: 220
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d19c888387d1c8247a4f648218c27b2c
+      spriteID: 97911d5570f2a2f4390d429090382e99
       internalID: -478133216650371298
       vertices: []
       indices: 
@@ -188,18 +197,18 @@ TextureImporter:
       name: Globitoanimated_4
       rect:
         serializedVersion: 2
-        x: 42
-        y: 543
-        width: 187
-        height: 205
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f6f286790e1c04aa7c9fc927cac3a2
+      spriteID: 08a57fa1c9c6b4b4381257f96eeb7f0e
       internalID: -3418851773085527771
       vertices: []
       indices: 
@@ -209,18 +218,18 @@ TextureImporter:
       name: Globitoanimated_5
       rect:
         serializedVersion: 2
-        x: 344
-        y: 535
-        width: 124
-        height: 220
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63f69587caaf4b6478b988f8ee6f59c0
+      spriteID: 5f6501dafa721f849a1d6e0bfa82bdb8
       internalID: -6470877617717696255
       vertices: []
       indices: 
@@ -230,18 +239,18 @@ TextureImporter:
       name: Globitoanimated_6
       rect:
         serializedVersion: 2
-        x: 623
-        y: 534
-        width: 83
-        height: 232
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 256
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3e5aed74fa35004aa4e891425a6d215
+      spriteID: 1b564ce346176ac47b64fd999c204d08
       internalID: 830470439576339264
       vertices: []
       indices: 
@@ -251,103 +260,19 @@ TextureImporter:
       name: Globitoanimated_7
       rect:
         serializedVersion: 2
-        x: 110
-        y: 274
-        width: 83
-        height: 232
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 256
+        y: 256
+        width: 256
+        height: 256
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 540016c2f79c4e843a12bfe58c9f31e5
+      spriteID: 6761d2155d55bd84682899d95ce5f4f5
       internalID: -2588776706855516186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Globitoanimated_8
-      rect:
-        serializedVersion: 2
-        x: 347
-        y: 278
-        width: 124
-        height: 220
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb695678b9a33f1458097393128f19e2
-      internalID: -1747832514717621163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Globitoanimated_9
-      rect:
-        serializedVersion: 2
-        x: 570
-        y: 282
-        width: 187
-        height: 205
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8689cb6d0b2a434a9aa516971f69084
-      internalID: -5848773502615615419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Globitoanimated_10
-      rect:
-        serializedVersion: 2
-        x: 89
-        y: 22
-        width: 124
-        height: 220
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: baa9d19601f964f409e21b95572357e0
-      internalID: -2899358341253443278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Globitoanimated_11
-      rect:
-        serializedVersion: 2
-        x: 327
-        y: 14
-        width: 83
-        height: 232
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 86a14ed6ba5feff449dbc3767d766d43
-      internalID: -7515849989993786942
       vertices: []
       indices: 
       edges: []
