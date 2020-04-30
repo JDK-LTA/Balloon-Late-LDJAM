@@ -245,7 +245,7 @@ public class BalloonBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PowerUp pu;
+        Powerup pu;
         if (collision.tag == "Obstacle")
         {
             if (isStarred)
@@ -264,9 +264,9 @@ public class BalloonBehaviour : MonoBehaviour
                 Debug.Log("Dead");
             }
         }
-        else if (pu = collision.GetComponent<PowerUp>())
+        else if (pu = collision.GetComponent<Powerup>())
         {
-            if (pu.size < size)
+            if (pu.size <= size)
             {
                 switch (pu.powerUp)
                 {
@@ -287,6 +287,7 @@ public class BalloonBehaviour : MonoBehaviour
                             hasPU = true;
                             localPu = pu.powerUp;
                             puTimer = pu.timer;
+                            akAmmo = pu.akAmmo;
                         }
                         break;
                     default:
