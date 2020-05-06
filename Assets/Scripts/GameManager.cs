@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public BalloonBehaviour balloon;
 
+    [Header("UI Settings")]
     public GameObject highScoreMenu;
 
     public UnityEngine.UI.Image puButtonImage;
@@ -139,6 +140,13 @@ public class GameManager : MonoBehaviour
         highScoreMenu.SetActive(true);
         GetComponent<HighScored>().SetHighScored(score);
     }
+
+    public void DesactivarHighScore()
+    {
+        Time.timeScale = 1;
+        highScoreMenu.SetActive(false);
+    }
+
 
     public void ChangePowerupIcon()
     {
