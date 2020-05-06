@@ -317,8 +317,11 @@ public class BalloonBehaviour : MonoBehaviour
             Destroy(collision.gameObject);
             ShieldPU(false);
         }
+
+       
         else
         {
+    
             GameManager.Instance.ActiveHighScore();
             Debug.Log("Dead");
         }

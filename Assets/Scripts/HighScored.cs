@@ -30,6 +30,14 @@ public class HighScored : MonoBehaviour
     {
         //Activar panel con puntuación Max y botón de Restart
         //Configurarlo, Canvas 
+        if (Input.GetKeyDown(KeyCode.Numlock))
+        {
+
+            GameManager.Instance.ActiveHighScore();
+
+            Debug.Log("Dead");
+
+        }
     }
 
 
@@ -43,6 +51,8 @@ public class HighScored : MonoBehaviour
 
             highScoreText.text = "" + highScored;
         }
+
+        currentScoreText.text = "" + currentScored;
     }
 
     public void SaveGame()
