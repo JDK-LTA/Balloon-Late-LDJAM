@@ -30,16 +30,23 @@ public class GameManager : MonoBehaviour
 
     public BalloonBehaviour balloon;
 
+    public GameObject highScoreMenu;
+
+
     public void Start()
     {
         if (pauseMenu)
         {
             pauseMenu.SetActive(false);
         }
-        else
+        if (highScoreMenu)
+        {
+            highScoreMenu.SetActive(false);
+        }
+        /*else
         {
             //Debug.LogError("Missing 'pauseMenu' variable in GameManager");
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -108,4 +115,13 @@ public class GameManager : MonoBehaviour
         bg1.speed /= multWithRocket;
         bg2.speed /= multWithRocket;
     }
+
+
+    public void ActiveHighScore()
+    {
+        Time.timeScale = 0;
+        highScoreMenu.SetActive(true);
+        GetComponent<HighScored>().SetHighScored(score);
+    }
+
 }

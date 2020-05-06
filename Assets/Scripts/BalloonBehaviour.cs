@@ -46,6 +46,14 @@ public class BalloonBehaviour : MonoBehaviour
     public Transform shootingPos;
     int orAmmo;
 
+
+    
+
+    private void Awake()
+    {
+  
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -311,6 +319,7 @@ public class BalloonBehaviour : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.ActiveHighScore();
             Debug.Log("Dead");
         }
     }
