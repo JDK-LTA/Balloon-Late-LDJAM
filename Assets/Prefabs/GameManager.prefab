@@ -54,3 +54,4 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   obsStacks: []
   balloon: {fileID: 0}
+  explosiveRadius: 2

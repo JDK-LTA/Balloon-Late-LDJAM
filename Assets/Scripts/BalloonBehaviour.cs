@@ -46,12 +46,13 @@ public class BalloonBehaviour : MonoBehaviour
     public Transform shootingPos;
     int orAmmo;
 
-
-    
+    public GameObject akArt;
+    public ParticleSystem firegunPs;
+    public GameObject rocketArt;
 
     private void Awake()
     {
-  
+
     }
 
     private void Start()
@@ -122,9 +123,19 @@ public class BalloonBehaviour : MonoBehaviour
         if (puActive)
         {
             t += Time.deltaTime;
-            if (t >= puTimer)
+            if (t >= puTimer /*&& canStopRocket*/)
             {
-                ClearPU();
+                if (localPu == PU.ROCKET)
+                {
+                    if (canStopRocket)
+                    {
+                        ClearPU();
+                    }
+                }
+                else
+                {
+                    ClearPU();
+                }
             }
         }
     }
@@ -178,6 +189,8 @@ public class BalloonBehaviour : MonoBehaviour
         puActive = false;
         UsePU(false);
         localPu = PU.NO_PU;
+        GameManager.Instance.ChangePowerupIcon();
+        hasPU = false;
         t = 0;
     }
 
@@ -188,35 +201,26 @@ public class BalloonBehaviour : MonoBehaviour
         if (up)
         {
             GameManager.Instance.RocketActive();
+            rocketArt.SetActive(true);
             rb.velocity = Vector2.zero;
         }
         else
         {
+            rocketArt.SetActive(false);
             GameManager.Instance.RocketDeactive();
         }
     }
     private void ShieldPU(bool up)
     {
-
         isShielded = up;
         shield.SetActive(up);
-        //if (up)
-        //{
-        //    //ACTIVATE SHIELD VISUAL EFFECT
-        //    shield.SetActive(true);
-        //}
-        //else
-        //{
-        //    //DEACTIVATE SHIELD VISUAL EFFECT
-
-        //}
     }
     private void Ak47PU(bool up)
     {
         if (up)
         {
             puTimer = 999999;
-            //SHOOT PROJECTILE
+            akArt.SetActive(true);
             ShootProjectile();
             akAmmo--;
             if (akAmmo == 0)
@@ -226,6 +230,7 @@ public class BalloonBehaviour : MonoBehaviour
         }
         else
         {
+            akArt.SetActive(false);
             //DEACTIVATE AK VISUAL EFFECT
             akAmmo = orAmmo;
         }
@@ -233,6 +238,7 @@ public class BalloonBehaviour : MonoBehaviour
     private void ShootProjectile()
     {
         GameObject go = Instantiate(bulletPrefab, shootingPos.position, shootingPos.rotation);
+        firegunPs.Play();
     }
     private void RayGunPU()
     {
@@ -267,8 +273,6 @@ public class BalloonBehaviour : MonoBehaviour
         {
             if (pu.size <= size)
             {
-
-
                 switch (pu.powerUp)
                 {
                     case PU.INFLATE:
@@ -295,6 +299,7 @@ public class BalloonBehaviour : MonoBehaviour
                         break;
                 }
 
+                GameManager.Instance.ChangePowerupIcon();
                 Destroy(collision.gameObject);
             }
             else
@@ -304,11 +309,13 @@ public class BalloonBehaviour : MonoBehaviour
         }
     }
 
+    bool canStopRocket = true;
     private void Death(Collider2D collision)
     {
         if (isStarred)
         {
             Debug.Log("Has star");
+            //canStopRocket = false;
             Destroy(collision.gameObject);
         }
         else if (isShielded)
@@ -318,12 +325,27 @@ public class BalloonBehaviour : MonoBehaviour
             ShieldPU(false);
         }
 
-       
+
         else
         {
-    
+            canStopRocket = true;
             GameManager.Instance.ActiveHighScore();
             Debug.Log("Dead");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isStarred)
+        {
+            canStopRocket = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isStarred)
+        {
+            canStopRocket = false;
         }
     }
 }

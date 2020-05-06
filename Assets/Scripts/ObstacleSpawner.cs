@@ -128,7 +128,7 @@ public class ObstacleSpawner : MonoBehaviour
             if (!os.obs[i])
             {
                 l.Add(i);
-                Debug.Log(i);
+                //Debug.Log(i);
             }
         }
 

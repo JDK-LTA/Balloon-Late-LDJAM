@@ -9,7 +9,7 @@ public class Powerup : MonoBehaviour
     public List<float> sizes;
     public float timer;
 
-    float speed;
+    [HideInInspector] public float speed;
     [HideInInspector] public float size = 0.6f;
     ObstacleSpawner os;
     SpriteRenderer sr;
