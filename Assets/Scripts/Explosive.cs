@@ -22,10 +22,10 @@ public class Explosive : MonoBehaviour
 
     public void OverlapExplosion()
     {
-        transform.parent.GetComponent<SpikeBehaviour>().downSpeed = 0f;
-        // ANIMACION DE EXPLOSION
+        transform.parent = null;
+        Instantiate(GameManager.Instance.explosiveAnimation, transform.position, transform.rotation);
         Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, GameManager.Instance.explosiveRadius);
-        gizmosbool = true;
+
         BalloonBehaviour bb;
         for (int i = colls.Length - 1; i >= 0; i--)
         {
@@ -37,25 +37,16 @@ public class Explosive : MonoBehaviour
                 }
                 else if (bb = colls[i].gameObject.GetComponent<BalloonBehaviour>())
                 {
-                    Debug.Log("dead");
-                    //bb.Death();
+                    bb.Death(GetComponent<Collider2D>());
                 }
             }
         }
+
+        Destroy(gameObject);
     }
 
     public void ExplosionFinished()
     {
         Destroy(gameObject);
-    }
-    bool gizmosbool = false;
-    private void OnDrawGizmos()
-    {
-        if (gizmosbool)
-        {
-
-            //Gizmos.color = Color.yellow;
-            //Gizmos.DrawSphere(transform.position, GameManager.Instance.explosiveRadius);
-        }
     }
 }

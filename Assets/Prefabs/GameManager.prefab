@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 617058544401222565}
   - component: {fileID: 617058544401222564}
+  - component: {fileID: 2068585466}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,8 +51,31 @@ MonoBehaviour:
   spawner: {fileID: 0}
   bg1: {fileID: 0}
   bg2: {fileID: 0}
+  bg3: {fileID: 0}
   crntScore: {fileID: 0}
   pauseMenu: {fileID: 0}
   obsStacks: []
   balloon: {fileID: 0}
-  explosiveRadius: 2
+  highScoreMenu: {fileID: 0}
+  puButtonImage: {fileID: 0}
+  rocketIcon: {fileID: 21300000, guid: 5cf952d83f88ada4ab4e143d5b8f3a50, type: 3}
+  akIcon: {fileID: 21300000, guid: 1e80698b0a0826a418c1b2e7c7cc1f6b, type: 3}
+  raygunIcon: {fileID: 21300000, guid: 4d6dde065a2f8694195f4e5ff2a3292f, type: 3}
+  noIcon: {fileID: 21300000, guid: 7a4532612ff30904a86455a27404edab, type: 3}
+  explosiveRadius: 1
+  explosiveAnimation: {fileID: 2863562527618342637, guid: f0aaed9fc94dd744f9527d04d901a8a1,
+    type: 3}
+--- !u!114 &2068585466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617058544401222567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab8db0bed07c7e438fa65ef9c27cbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoreText: {fileID: 0}
+  currentScoreText: {fileID: 0}

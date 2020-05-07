@@ -310,7 +310,7 @@ public class BalloonBehaviour : MonoBehaviour
     }
 
     bool canStopRocket = true;
-    private void Death(Collider2D collision)
+    public void Death(Collider2D collision)
     {
         if (isStarred)
         {
@@ -330,8 +330,14 @@ public class BalloonBehaviour : MonoBehaviour
         {
             canStopRocket = true;
             GameManager.Instance.ActiveHighScore();
+            GetComponent<Animator>().SetTrigger("Die");
             Debug.Log("Dead");
         }
+    }
+
+    private void DestroyGO()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

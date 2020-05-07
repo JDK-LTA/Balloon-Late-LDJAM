@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     public float explosiveRadius = 2f;
 
+    public GameObject explosiveAnimation;
+
     public void Start()
     {
         if (pauseMenu)
