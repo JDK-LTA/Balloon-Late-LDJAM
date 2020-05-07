@@ -63,6 +63,6 @@ public class HighScored : MonoBehaviour
     public void ReiniciarJuego()
     {
         GameManager.Instance.DesactivarHighScore();
-        SceneManager.LoadScene(currentLevel.buildIndex);
+        SceneManager.LoadScene("SampleScene");
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class ObsStack
@@ -90,9 +91,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
 
+        SceneManager.LoadScene("0_Menu");
         //GO TO MENU
     }
-
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
     public void RocketActive()
     {
@@ -146,7 +151,10 @@ public class GameManager : MonoBehaviour
     public void DesactivarHighScore()
     {
         Time.timeScale = 1;
-        highScoreMenu.SetActive(false);
+        if (highScoreMenu)
+        {
+            highScoreMenu.SetActive(false);
+        }
     }
 
 
